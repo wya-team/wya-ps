@@ -1,16 +1,4 @@
-/**
- * 微型事件Pub/Sub模块
- */
+export Observer from './observer';
 
-class Publish {
-	constructor() {
-	}
-	on() {
-	}
-	trigger() {
-
-	}
-	off() {
-
-	}
-}
+// 待开发
+// ...

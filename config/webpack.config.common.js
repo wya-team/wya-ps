@@ -15,7 +15,7 @@ const localPort = ((addPath) => {
 	}
 })();
 
-const libName = userConfig.libName || `test`;
+const libName = userConfig.libName || `ps`;
 const localIp = (() => {
 	let ips = [];
 	let os = require('os');
