@@ -12,6 +12,7 @@ npm install wya-ps --save
 ## 使用方法
 
 - `subscribe` 订阅
+- `once` 一次订阅
 - `unsubscribe` 取消订阅
 - `publish` 发布事件
 

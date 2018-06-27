@@ -1,6 +1,6 @@
 import { Observer } from '../src/main';
 let count = 0;
-let source = new Observer({ a: 2});
+let source = new Observer({ a: 2 });
 
 source.subscribe('[event-name]', ({ name }) => {
 	count++;
@@ -28,6 +28,16 @@ source.subscribe('[event-name]', function({ name }) {
 	console.log(count, name, this, ++this.a);
 });
 
+// 一次订阅
+source.once('once', function({ name }) {
+	console.log('只能订阅一次');
+});
+source.publish('once');
+source.publish('once');
+source.publish('once');
+source.publish('once');
+source.publish('once');
+source.publish('once');
 // 测试作用域
 let test = {
 	a: 1,
@@ -35,9 +45,9 @@ let test = {
 		source.subscribe(({ name }) => {
 			console.log('有订阅就会执行我');
 			console.log(this, name);
-		})
+		});
 	}
-}
+};
 test.b();
 setTimeout(() => {
 	source.publish('[event-name]', { name: 'wya-ps' }).unsubscribe('[event-name]');

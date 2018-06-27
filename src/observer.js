@@ -30,7 +30,7 @@ class Observer {
 		for (let key in target) {
 			this[key] = target[key];
 		}
-		// 老式jQuery写法
+		// 通常我们会使用 on/off/trigger
 		// this.on = this.subscribe;
 		// this.off = this.unsubscribe;
 		// this.trigger = this.publish;
@@ -69,6 +69,7 @@ class Observer {
 	 * 删除一个指定的事件队列
 	 * @param  {string} event 需要删除的事件名
 	 * @return {object} 返回自身以便于链式调用
+	 * 注：没有添加第二个参数（对应的函数方法）
 	 */
 	unsubscribe(event) {
 		if (typeof event === 'string') {
@@ -79,7 +80,24 @@ class Observer {
 
 		return this;
 	}
+	/**
+	 * 一次订阅
+	 */
+	once(event, callback) {
+		if (typeof event === 'string' && ( !this.__events__[event] || this.__events__[event].length === 0)) {
+			let fired = false;
 
+			const _callback = (opts) => {
+				this.unsubscribe(event);
+				if (!fired) {
+					fired = true;
+					callback.call(this, opts);
+				}
+			};
+			this.subscribe(event, _callback);
+		}
+		return this;
+	}
 	/**
 	 * publish/trigger
 	 * 用于发布'一个'指定的事件
