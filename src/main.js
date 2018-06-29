@@ -1,4 +1,4 @@
-export Observer from './observer';
+export { Event } from './event';
 
 // 待开发
 // ...

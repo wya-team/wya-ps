@@ -4,11 +4,11 @@
  * - 支持多个相同事件同时绑定，当某个事件返回`return false`; 不会继续执行
  */
 
-class Observer {
+class Event {
 	constructor(target = {}) {
 		// 不可以存在关键值
 		if (typeof target !== 'object' 
-			|| target instanceof Observer 
+			|| target instanceof Event 
 			|| target.__events__  
 			|| target.__listeners__  
 			|| target.subscribe 
@@ -24,8 +24,8 @@ class Observer {
 		 * 不想暴露到最外层
 		 * this.__proto__.__events__
 		 */
-		Observer.prototype.__events__ = {};
-		Observer.prototype.__listeners__ = [];
+		Event.prototype.__events__ = {};
+		Event.prototype.__listeners__ = [];
 		
 		for (let key in target) {
 			this[key] = target[key];
@@ -127,4 +127,4 @@ class Observer {
 	}
 }
 
-export default Observer;
+export default Event;

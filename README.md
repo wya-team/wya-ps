@@ -17,8 +17,8 @@ npm install wya-ps --save
 - `publish` 发布事件
 
 ```js
-import { Observer } from 'wya-ps';
-let source = new Observer({ a: 2 });
+import { Event } from 'wya-ps';
+let source = new Event({ a: 2 });
 
 // 订阅事件 ，不使用`() => {}`, 使用`function() {}`可以拿到当前对象，进行链式操作
 source.subscribe('[event-name]', ({ name }) => {
