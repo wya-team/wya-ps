@@ -34,10 +34,10 @@ source.subscribe(({ name }) => {
 source.publish('[event-name]', { name: 'wya-ps' }); 
 
 // 取消事件订阅
-source.publish('[event-name]');
+source.unsubscribe('[event-name]');
 
 // 取消订阅listener
-source.publish();
+source.unsubscribe();
 ```
 
 ## 待开发
