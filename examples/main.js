@@ -1,29 +1,29 @@
-import { Observer } from '../src/main';
+import { EventStore } from '../src/main';
 let count = 0;
-let source = new Observer({ a: 2 });
+let source = new EventStore({ a: 2 });
 
-source.subscribe('[event-name]', ({ name }) => {
+source.on('[event-name]', ({ name }) => {
 	count++;
 	console.log(count, name, this);
 });
-source.subscribe('[event-name]', ({ name }) => {
+source.on('[event-name]', ({ name }) => {
 	count++;
 	console.log(count, name);
 });
 
 
-source.subscribe('[event-name]', ({ name }) => {
+source.on('[event-name]', ({ name }) => {
 	count++;
 	console.log(count, name);
 });
 
-source.subscribe('[event-name]', ({ name }) => {
+source.on('[event-name]', ({ name }) => {
 	count++;
 	console.log(count, name);
 });
 
 // 改变对象的值
-source.subscribe('[event-name]', function({ name }) {
+source.on('[event-name]', function({ name }) {
 	count++;
 	console.log(count, name, this, ++this.a);
 });
@@ -32,17 +32,17 @@ source.subscribe('[event-name]', function({ name }) {
 source.once('once', function({ name }) {
 	console.log('只能订阅一次');
 });
-source.publish('once');
-source.publish('once');
-source.publish('once');
-source.publish('once');
-source.publish('once');
-source.publish('once');
+source.emit('once');
+source.emit('once');
+source.emit('once');
+source.emit('once');
+source.emit('once');
+source.emit('once');
 // 测试作用域
 let test = {
 	a: 1,
 	b() {
-		source.subscribe(({ name }) => {
+		source.on(({ name }) => {
 			console.log('有订阅就会执行我');
 			console.log(this, name);
 		});
@@ -50,6 +50,7 @@ let test = {
 };
 test.b();
 setTimeout(() => {
-	source.publish('[event-name]', { name: 'wya-ps' }).unsubscribe('[event-name]');
-	source.publish();
+	console.log(222);
+	source.emit('[event-name]', { name: 'wya-ps' }).off('[event-name]');
+	source.emit();
 }, 5000);

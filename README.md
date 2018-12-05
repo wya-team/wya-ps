@@ -11,33 +11,33 @@ npm install wya-ps --save
 
 ## 使用方法
 
-- `subscribe` 订阅
+- `on` 订阅
 - `once` 一次订阅
-- `unsubscribe` 取消订阅
-- `publish` 发布事件
+- `off` 取消订阅
+- `emit` 发布事件
 
 ```js
 import { Event } from 'wya-ps';
 let source = new Event({ a: 2 });
 
 // 订阅事件 ，不使用`() => {}`, 使用`function() {}`可以拿到当前对象，进行链式操作
-source.subscribe('[event-name]', ({ name }) => {
+source.on('[event-name]', ({ name }) => {
 	console.log(name, this);
 });
 
 // 订阅listener
-source.subscribe(({ name }) => {
+source.on(({ name }) => {
 	console.log(name, this);
 });
 
 // 发布事件，第一个值事件，第二个值参数
-source.publish('[event-name]', { name: 'wya-ps' }); 
+source.emit('[event-name]', { name: 'wya-ps' }); 
 
 // 取消事件订阅
-source.unsubscribe('[event-name]');
+source.off('[event-name]');
 
 // 取消订阅listener
-source.unsubscribe();
+source.off();
 ```
 
 ## 待开发
