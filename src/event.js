@@ -8,7 +8,9 @@ class EventStore {
 	constructor(target = {}, opts = {}) {
 
 		const { throwError } = opts;
-		this.throwError = throwError || (msg => { console.error(msg); });
+		Object.defineProperty(this, 'throwError', {
+			value: throwError || (msg => { console.error(msg); })
+		});
 
 		// 不可以存在关键值
 		if (typeof target !== 'object' 
@@ -26,10 +28,13 @@ class EventStore {
 		}
 		/**
 		 * 不想暴露到最外层
-		 * this.__proto__.__events__
 		 */
-		EventStore.prototype.__events__ = {};
-		EventStore.prototype.__listeners__ = [];
+		Object.defineProperty(this, '__events__', {
+			value: {}
+		});
+		Object.defineProperty(this, '__listeners__', {
+			value: []
+		});
 		
 		for (let key in target) {
 			this[key] = target[key];
@@ -71,10 +76,12 @@ class EventStore {
 	 * @return {object} 返回自身以便于链式调用
 	 * 注：没有添加第二个参数（对应的函数方法）
 	 */
-	off(event) {
-		if (typeof event === 'string') {
+	off(event, callback) {
+		if (typeof event === 'string' && !callback) {
 			// this.__events__[event] = [];
 			delete this.__events__[event];
+		} else if (typeof event === 'string' && this.__events__[event] && callback){ 
+			this.__events__[event] = this.__events__[event].filter(item => item !== callback);
 		} else if (typeof event === undefined){
 			this.__listeners__ = [];
 		}
@@ -87,15 +94,15 @@ class EventStore {
 	once(event, callback) {
 		if (typeof event === 'string' && ( !this.__events__[event] || this.__events__[event].length === 0)) {
 			let fired = false;
+			const fn = (opts) => {
+				this.off(event, fn);
 
-			const _callback = (opts) => {
-				this.off(event);
 				if (!fired) {
 					fired = true;
 					callback.call(this, opts);
 				}
 			};
-			this.on(event, _callback);
+			this.on(event, fn);
 		}
 		return this;
 	}
