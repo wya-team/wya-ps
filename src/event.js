@@ -9,7 +9,8 @@ class EventStore {
 
 		const { throwError } = opts;
 		Object.defineProperty(this, 'throwError', {
-			value: throwError || (msg => { console.error(msg); })
+			value: throwError || (msg => { console.error(msg); }),
+			writable: true
 		});
 
 		// 不可以存在关键值
