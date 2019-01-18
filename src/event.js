@@ -93,15 +93,12 @@ class EventStore {
 	 * 一次订阅
 	 */
 	once(event, callback) {
-		if (typeof event === 'string' && ( !this.__events__[event] || this.__events__[event].length === 0)) {
-			let fired = false;
+		// todo: 是否考虑当前事件有且只有一个
+		// if (typeof event === 'string' && ( !this.__events__[event] || this.__events__[event].length === 0)) {
+		if (typeof event === 'string' && typeof callback === "function") {
 			const fn = (opts) => {
 				this.off(event, fn);
-
-				if (!fired) {
-					fired = true;
-					callback.call(this, opts);
-				}
+				callback.call(this, opts);
 			};
 			this.on(event, fn);
 		}

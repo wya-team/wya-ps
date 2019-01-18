@@ -38,7 +38,10 @@ source.off('[event-name]', fn);
 
 // 一次订阅
 source.once('once', function({ name }) {
-	console.log('只能订阅一次');
+	console.log('只能订阅一次1');
+});
+source.once('once', function({ name }) {
+	console.log('只能订阅一次2');
 });
 source.emit('once');
 source.emit('once');
