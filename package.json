@@ -1,6 +1,6 @@
 {
   "name": "wya-ps",
-  "version": "0.1.5",
+  "version": "0.1.8",
   "description": "wya-ps for js",
   "main": "lib/main.js",
   "files": [

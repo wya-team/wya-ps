@@ -7,9 +7,15 @@
 class EventStore {
 	constructor(target = {}, opts = {}) {
 
-		const { throwError } = opts;
-		Object.defineProperty(this, 'throwError', {
-			value: throwError || (msg => { console.error(msg); }),
+		const { onError, onInvoke } = opts;
+
+		Object.defineProperty(this, '$error', {
+			value: onError || (msg => { console.error(msg); }),
+			writable: true
+		});
+
+		Object.defineProperty(this, '$emit', {
+			value: onInvoke || (v => {}),
 			writable: true
 		});
 
@@ -22,7 +28,7 @@ class EventStore {
 			|| target.off 
 			|| target.emit
 		) {
-			this.throwError(`[wya-ps]: 不符合观察条件，请删除以下对象.
+			this.$error(`[wya-ps]: 不符合观察条件，请删除以下对象.
 				\n__events__\n__listeners__\non\noff\nemit
 			`);
 			return false;
@@ -64,6 +70,8 @@ class EventStore {
 			this.__events__[action] || (this.__events__[action] = []);
 			this.__events__[action].push(callback);
 
+			this.$emit.call(this, 'on', action, callback);
+
 		} else if (typeof action === 'function') {
 			this.__listeners__.push(action);
 		}
@@ -83,9 +91,12 @@ class EventStore {
 			delete this.__events__[event];
 		} else if (typeof event === 'string' && this.__events__[event] && callback){ 
 			this.__events__[event] = this.__events__[event].filter(item => item !== callback);
+			this.__events__[event].length === 0 && delete this.__events__[event];
 		} else if (typeof event === undefined){
 			this.__listeners__ = [];
 		}
+
+		this.$emit.call(this, 'off', event, callback);
 
 		return this;
 	}
@@ -113,7 +124,7 @@ class EventStore {
 	 */
 	emit(event, opts = {}) {
 		if (opts instanceof Array || typeof opts !== 'object' || opts.event) {
-			this.throwError(`[wya-ps]: ${event}事件 - 回调参数必须是对象, 且不能让带event关键字`);
+			this.$error(`[wya-ps]: ${event}事件 - 回调参数必须是对象, 且不能让带event关键字`);
 			return this;
 		}
 		if (typeof event === 'string' 
