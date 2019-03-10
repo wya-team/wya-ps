@@ -58,10 +58,7 @@ const webpackConfig = {
 				],
 				use: [
 					{
-						loader: 'babel-loader',
-						options: {
-							cacheDirectory: true // 启用编译缓存
-						}
+						loader: 'babel-loader'
 					}
 				]
 			},

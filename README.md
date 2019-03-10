@@ -1,4 +1,4 @@
-# wya-ps
+# \@wya/ps
 [![npm][npm-image]][npm-url] [![changelog][changelog-image]][changelog-url]
 
 ## [Demo](https://wya-team.github.io/wya-ps/demo/index.html)
@@ -6,7 +6,7 @@
 ## 安装
 
 ```vim
-npm install wya-ps --save
+npm install @wya/ps --save
 ```
 
 ## 使用方法
@@ -47,5 +47,5 @@ source.off();
 [changelog-image]: https://img.shields.io/badge/changelog-md-blue.svg
 [changelog-url]: CHANGELOG.md
 
-[npm-image]: https://img.shields.io/npm/v/wya-ps.svg
-[npm-url]: https://www.npmjs.com/package/wya-ps
+[npm-image]: https://img.shields.io/npm/v/@wya/ps.svg
+[npm-url]: https://www.npmjs.com/package/@wya/ps
