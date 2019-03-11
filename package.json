@@ -2,7 +2,7 @@
   "name": "@wya/ps",
   "version": "1.0.1",
   "description": "wya-ps for js",
-  "main": "lib/main.js",
+  "main": "lib/index.js",
   "files": [
     "src/**",
     "lib/**",

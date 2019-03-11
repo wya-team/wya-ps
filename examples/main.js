@@ -1,4 +1,4 @@
-import { EventStore } from '../src/main';
+import { EventStore } from '../src/index';
 let count = 0;
 let source = new EventStore({ a: 2 });
 console.log(Object.keys(source));
