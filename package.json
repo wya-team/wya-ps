@@ -54,7 +54,7 @@
     "@babel/runtime": "^7.3.4",
     "autoprefixer": "^8.3.0",
     "babel-eslint": "^8.2.3",
-    "babel-jest": "^23.4.2",
+    "babel-jest": "^24.1.0",
     "babel-loader": "^8.0.4",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
