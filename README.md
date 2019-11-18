@@ -1,7 +1,9 @@
 # \@wya/ps
 [![npm][npm-image]][npm-url] [![changelog][changelog-image]][changelog-url]
 
-## [Demo](https://wya-team.github.io/wya-ps/demo/index.html)
+- [Demo](https://wya-team.github.io/wya-ps/demo/index.html)
+
+- [Documents](https://wya-team.github.io/wya-ps/docs/#/)
 
 ## 安装
 
