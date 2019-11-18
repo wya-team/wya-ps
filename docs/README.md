@@ -75,7 +75,7 @@ $ npm run lib
 
 ### `on` 
 
-`source.on(eventName, callback)`
+`source.on(eventName: String, callback: Function)`
 
 订阅事件
 
@@ -91,7 +91,7 @@ source.on('[event-name]', ({ name }) => {
 
 ### `once` 
 
-`source.once(eventName, callback)`
+`source.once(eventName: String, callback: Function)`
 
 一次订阅
 
@@ -107,7 +107,7 @@ source.once('[event-name]', ({ name }) => {
 
 ### `off` 
 
-`source.off(eventName, callback)`
+`source.off(eventName: String, callback: Function)`
 
 取消订阅
 
@@ -128,7 +128,7 @@ source.off();
 
 ### `emit` 
 
-`source.emit(eventName, params)`
+`source.emit(eventName: String, params: Object)`
 
 发布事件
 
@@ -143,7 +143,7 @@ source.emit('[event-name]', { name: 'wya-ps' });
 
 ### `listener` 
 
-`source.on(callback)`
+`source.on(callback: Function)`
 
 监听
 
