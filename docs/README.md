@@ -73,6 +73,8 @@ $ npm run lib
 
 ## API
 
+---
+
 ### `on` 
 
 `source.on(eventName: String, callback: Function)`
@@ -89,6 +91,8 @@ source.on('[event-name]', ({ name }) => {
 });
 ```
 
+---
+
 ### `once` 
 
 `source.once(eventName: String, callback: Function)`
@@ -104,6 +108,8 @@ source.once('[event-name]', ({ name }) => {
 	console.log(name, this);
 });
 ```
+
+---
 
 ### `off` 
 
@@ -126,6 +132,8 @@ source.off('[event-name]');
 source.off();
 ```
 
+---
+
 ### `emit` 
 
 `source.emit(eventName: String, params: Object)`
@@ -140,6 +148,8 @@ source.off();
 // 发布事件，第一个值事件，第二个值参数
 source.emit('[event-name]', { name: 'wya-ps' }); 
 ```
+
+---
 
 ### `listener` 
 
