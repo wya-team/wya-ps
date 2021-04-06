@@ -59,7 +59,7 @@ class EventStore {
 	on(action, callback) {
 		if (typeof action === "object") {
 			for (key in action) {
-				if (action.hasOwnProperty(key) 
+				if (Object.hasOwnProperty.call(action, key)
 					&& (typeof action[key] === "function")
 				) {
 					this.on(key, action[key]);
@@ -132,7 +132,7 @@ class EventStore {
 			return this;
 		}
 		if (typeof event === 'string' 
-				&& this.__events__[event] 
+				&& Object.hasOwnProperty.call(this.__events__, event)
 				&& (this.__events__[event] instanceof Array)
 		) {
 			// 每个订阅器都会触发，直到某个返回false
