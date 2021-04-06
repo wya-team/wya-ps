@@ -47,6 +47,7 @@ class EventStore {
 			this[key] = target[key];
 		}
 	}
+
 	/**
 	 * on/on
 	 * 用来订阅事件，可单个或者多个
@@ -78,6 +79,7 @@ class EventStore {
 
 		return this;
 	}
+
 	/**
 	 * off/off
 	 * 删除一个指定的事件队列
@@ -89,10 +91,10 @@ class EventStore {
 		if (typeof event === 'string' && !callback) {
 			// this.__events__[event] = [];
 			delete this.__events__[event];
-		} else if (typeof event === 'string' && this.__events__[event] && callback){ 
+		} else if (typeof event === 'string' && this.__events__[event] && callback) { 
 			this.__events__[event] = this.__events__[event].filter(item => item !== callback);
 			this.__events__[event].length === 0 && delete this.__events__[event];
-		} else if (typeof event === undefined){
+		} else if (typeof event === 'undefined') {
 			this.__listeners__ = [];
 		}
 
@@ -100,6 +102,7 @@ class EventStore {
 
 		return this;
 	}
+
 	/**
 	 * 一次订阅
 	 */
@@ -115,6 +118,7 @@ class EventStore {
 		}
 		return this;
 	}
+
 	/**
 	 * emit
 	 * 用于发布'一个'指定的事件
@@ -128,7 +132,7 @@ class EventStore {
 			return this;
 		}
 		if (typeof event === 'string' 
-				&& this.__events__.hasOwnProperty(event) 
+				&& this.__events__[event] 
 				&& (this.__events__[event] instanceof Array)
 		) {
 			// 每个订阅器都会触发，直到某个返回false
